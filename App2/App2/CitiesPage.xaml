@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.CitiesPage">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Города"
+                   TextColor="White" 
+                   FontSize="Title" VerticalOptions="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#81FBB8">
+            <SearchBar x:Name="CitiesSearchBar"
+                       Grid.Row="0" WidthRequest="120"
+                       TextChanged="CitiesSearchBar_TextChanged"
+                       Placeholder="Введите город" />
+            <ListView x:Name="citiesListView" SeparatorVisibility="Default" CachingStrategy="RecycleElement"
+                      SeparatorColor="Black" HasUnevenRows="True" VerticalScrollBarVisibility="Always" 
+                      Grid.Row="1" Grid.RowSpan="9">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell Text="{Binding NameCity}" TextColor="Black" ImageSource = "{Binding Id}" Height="48" IsEnabled="False"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.SettingsPage" >
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Настройки"
+                   TextColor="White"
+                   FontSize="Title" VerticalOptions="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#81FBB8">
+            <TableView Grid.Row="0" HasUnevenRows="True">
+                <TableView.Root>
+                    <TableSection>
+                        <SwitchCell x:Name="animationGradientSwitch" 
+                                    Text="Анимация градиента на главном экране"
+                                    OnChanged="animationGradientSwitch_OnChanged"/>
+                    </TableSection>
+                </TableView.Root>
+            </TableView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.MainPage"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="60" />
+                <Setter Property="HeightRequest" Value="59"/>
+                <Setter Property="WidthRequest" Value="325"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
+                <BoxView.Background>
+                    <LinearGradientBrush >
+                        <GradientStop Color="#abdcff" Offset="0.3"/>
+                        <GradientStop Color="#81FBB8" Offset="0.5"/>
+                        <GradientStop Color="#90f7ec" Offset="1.0"/>
+                        <GradientStop Color="#28C76F" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            <Grid>
+
+                <Image Source="ALogoCity2min25.png" Grid.RowSpan="4" Grid.Row="0"/>
+                <Button x:Name="ButtonPlay" Text="Играть" Style="{StaticResource buttonStyle}" 
+                         Clicked="ButtonPlay_Clicked" Grid.Row="4" VerticalOptions="End" ImageSource="BplayIcon2"/>
+                <Button x:Name="ButtonCities" Text="Города" Style="{StaticResource buttonStyle}" 
+                        Clicked="ButtonCities_Clicked" Grid.Row="5" VerticalOptions="Center" ImageSource="Ccity_32px"/>
+                <Button x:Name="ButtonSetting" Text="Настройки" Style="{StaticResource buttonStyle}" 
+                        Clicked="ButtonSetting_Clicked" Grid.Row="6" VerticalOptions="Start" ImageSource="Dsettings_24px"/>
+                
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
