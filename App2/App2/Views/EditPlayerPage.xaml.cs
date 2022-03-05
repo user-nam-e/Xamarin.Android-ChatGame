@@ -19,9 +19,10 @@ namespace App2.Views
             EntryName.Text = Preferences.Get("playerName", "");
         }
 
-        private void EntryName_Completed(object sender, EventArgs e)
+        private async void EntryName_Completed(object sender, EventArgs e)
         {
             Preferences.Set("playerName", EntryName.Text);
+            await Navigation.PopAsync();
         }
     }
 }

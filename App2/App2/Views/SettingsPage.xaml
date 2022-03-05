@@ -9,6 +9,8 @@
                    FontSize="Title" VerticalOptions="Center" />
         </Grid>
     </NavigationPage.TitleView>
+
+    <!--лучше сюда не лезьт-->
     <ContentPage.Content>
         <Grid>
             <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
@@ -24,13 +26,35 @@
             <TableView Grid.Row="0" HasUnevenRows="True" BackgroundColor="Transparent">
                 <TableView.Root>
                     <TableSection>
-                        <ViewCell Height="80">
-                            <Grid BackgroundColor="White">
-                                <Grid BackgroundColor="#81FBB8" Margin="2.5">
-
+                        <!--<ViewCell Height="80">
+                            <Grid>
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition />
-                                        <ColumnDefinition Width="2.5"/>
+                                        <ColumnDefinition Width="60"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="23"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Margin="10,5,0,0" 
+                                        Text="Анимация градиента на главном экране" 
+                                           FontSize="17" FontAttributes="Bold" TextColor="Black" />
+
+                                    <Label x:Name="animationTurnOff" Grid.Row="1"  
+                                           Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
+
+                                    <Switch x:Name="animationGradientSwitch" Grid.Column="1"  
+                                            Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center"
+                                            Toggled="AnimationGradientSwitch_OnChanged"/>
+                                </Grid>
+                            </Grid>
+                        </ViewCell>-->
+                        <!--<ViewCell Height="80">
+                            <Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
                                         <ColumnDefinition Width="60"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -38,31 +62,43 @@
                                         <RowDefinition Height="23"/>
                                     </Grid.RowDefinitions>
 
-                                    <Frame Grid.Column="1" BackgroundColor="White" Grid.RowSpan="2" HasShadow="False"/>
                                     <Label Margin="10,5,0,0" 
-                                        Text="Анимация градиента на главном экране" FontSize="17" FontAttributes="Bold" TextColor="Black" />
+                                        Text="Использовать локальную базу данных" FontSize="17" FontAttributes="Bold" TextColor="Black" />
 
-                                    <Label x:Name="animationTurnOff" Grid.Row="1"  Margin="10,0,0,0" Text="Выкл" TextColor="Gray" FontSize="15"/>
+                                    <Label x:Name="localTurnOff" Grid.Row="1"  Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
 
-                                    <Switch x:Name="animationGradientSwitch" Grid.Column="2"  
+                                    <Switch x:Name="localDataSwitch" Grid.Column="1"  
                                             Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center"
-                                            Toggled="AnimationGradientSwitch_OnChanged"/>
+                                            Toggled="LocalDataSwitch_OnChanged"/>
                                 </Grid>
                             </Grid>
-                            <!--<SwitchCell 
-                                    Text="Анимация градиента на главном экране"
-                                    OnChanged="AnimationGradientSwitch_OnChanged"/>-->
-                        </ViewCell>
-                        <!--<ViewCell>
+                        </ViewCell>-->
+                        <ViewCell Height="80">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="EditPlayer_Clicked"/>
+                                </Grid.GestureRecognizers>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="33"/>
+                                    </Grid.RowDefinitions>
 
+                                    <Label Margin="10,5,0,0" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Text="Редактировать игровое имя" FontSize="17" FontAttributes="Bold" TextColor="Black">
+                                    </Label>
+
+                                    <Label Text="Текущее имя:" Grid.Row="1" Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
+                                    <Label Grid.Row="1" Grid.Column="1"
+                                            x:Name="currentName"  
+                                            Margin="10,0,0,0" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
+                                </Grid>
+                            </Grid>
                         </ViewCell>
-                        -->
-                        <!--<SwitchCell x:Name="localDataSwitch"
-                                    Text="Использовать локальную базу данных"
-                                    OnChanged="LocalDataSwitch_OnChanged"/>-->
-                        <!--
-                        <ViewCell Height="70">
-                            -->
                         <!--<Button x:Name="editPlayer" Text="Изменить имя профиля" BackgroundColor="#81FBB8" TextColor="#574928" TextTransform="None"
                                     HorizontalOptions="Fill" VerticalOptions="Fill" 
                                     FontSize="15" Clicked="editPlayer_Clicked"/>-->
