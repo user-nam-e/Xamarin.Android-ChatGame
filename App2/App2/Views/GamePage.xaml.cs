@@ -99,7 +99,7 @@ namespace App2
                         .Where(x => x.CityName.ToLower() == entryText.Text.ToLower().Trim())
                         .Select(x => x).First();
                 }
-                //GameBot();
+                GameBot();
                 // ну как-то так
                 usedСities.Add(currentCity);
                 allСities.Remove(currentCity);

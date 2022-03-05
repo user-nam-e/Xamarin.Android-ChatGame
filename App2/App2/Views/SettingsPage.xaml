@@ -3,28 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App2.SettingsPage" >
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
+        <Grid>
             <Label Text="Настройки"
                    TextColor="White"
-                   FontSize="Title" VerticalOptions="Center"/>
-        </StackLayout>
+                   FontSize="Title" VerticalOptions="Center" />
+        </Grid>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <Grid BackgroundColor="#81FBB8">
-            <TableView Grid.Row="0" HasUnevenRows="True">
+        <Grid>
+            <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
+                <BoxView.Background>
+                    <LinearGradientBrush >
+                        <GradientStop Color="#abdcff" Offset="0.3"/>
+                        <GradientStop Color="#81FBB8" Offset="0.5"/>
+                        <GradientStop Color="#90f7ec" Offset="1.0"/>
+                        <GradientStop Color="#28C76F" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            <TableView Grid.Row="0" HasUnevenRows="True" BackgroundColor="Transparent">
                 <TableView.Root>
                     <TableSection>
-                        <SwitchCell x:Name="animationGradientSwitch"
+                        <ViewCell Height="70">
+                            <Grid BackgroundColor="White">
+                                <Grid Margin="5" BackgroundColor="Red">
+                                    
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="60"/>
+                                </Grid.ColumnDefinitions>
+                                <Switch IsToggled="true" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" />
+                                </Grid>
+
+                                
+                                
+                            </Grid>
+                            <!--<SwitchCell x:Name="animationGradientSwitch"
                                     Text="Анимация градиента на главном экране"
-                                    OnChanged="AnimationGradientSwitch_OnChanged"/>
-                        <SwitchCell x:Name="localDataSwitch"
-                                    Text="Использовать локальную базу данных"
-                                    OnChanged="LocalDataSwitch_OnChanged"/>
-                        <ViewCell>
-                            <Button x:Name="editPlayer" Text="Изменить имя профиля" BackgroundColor="#81FBB8" TextColor="#574928" TextTransform="None"
-                                    HorizontalOptions="Fill" VerticalOptions="Center" 
-                                    FontSize="15" Clicked="editPlayer_Clicked"/>
+                                    OnChanged="AnimationGradientSwitch_OnChanged"/>-->
                         </ViewCell>
+                        <!--<ViewCell>
+
+                        </ViewCell>
+                        -->
+                        <!--<SwitchCell x:Name="localDataSwitch"
+                                    Text="Использовать локальную базу данных"
+                                    OnChanged="LocalDataSwitch_OnChanged"/>-->
+                        <!--
+                        <ViewCell Height="70">
+                            -->
+                        <!--<Button x:Name="editPlayer" Text="Изменить имя профиля" BackgroundColor="#81FBB8" TextColor="#574928" TextTransform="None"
+                                    HorizontalOptions="Fill" VerticalOptions="Fill" 
+                                    FontSize="15" Clicked="editPlayer_Clicked"/>-->
+                        <!--
+                        </ViewCell>
+                        <ViewCell>
+                            <Switch IsToggled="true" VerticalOptions="CenterAndExpand" 
+             HorizontalOptions="Center" />
+                        </ViewCell>-->
                     </TableSection>
                 </TableView.Root>
             </TableView>

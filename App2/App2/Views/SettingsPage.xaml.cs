@@ -16,23 +16,24 @@ namespace App2
         public SettingsPage()
         {
             InitializeComponent();
-            animationGradientSwitch.On = Preferences.Get("animationGradientSwitch", true);
-            localDataSwitch.On = Preferences.Get("localDataSwitch", true);
         }
+        //    animationGradientSwitch.On = Preferences.Get("animationGradientSwitch", true);
+        //    localDataSwitch.On = Preferences.Get("localDataSwitch", true);
+        //}
 
-        private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
-        {
-            Preferences.Set("animationGradientSwitch", animationGradientSwitch.On);
-        }
+        //private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
+        //{
+        //    Preferences.Set("animationGradientSwitch", animationGradientSwitch.On);
+        //}
 
-        private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
-        {
-            Preferences.Set("localDataSwitch", localDataSwitch.On);
-        }
+        //private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
+        //{
+        //    Preferences.Set("localDataSwitch", localDataSwitch.On);
+        //}
 
-        private async void editPlayer_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new EditPlayerPage(), false);
-        }
+        //private async void editPlayer_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new EditPlayerPage(), false);
+        //}
     }
 }
