@@ -16,15 +16,19 @@ namespace App2
         public SettingsPage()
         {
             InitializeComponent();
+            animationGradientSwitch.IsToggled = Preferences.Get("animationGradientSwitch", true);
+
+            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
         }
-        //    animationGradientSwitch.On = Preferences.Get("animationGradientSwitch", true);
         //    localDataSwitch.On = Preferences.Get("localDataSwitch", true);
         //}
 
-        //private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
-        //{
-        //    Preferences.Set("animationGradientSwitch", animationGradientSwitch.On);
-        //}
+        private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
+        {
+            Preferences.Set("animationGradientSwitch", animationGradientSwitch.IsToggled);
+
+            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
+        }
 
         //private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
         //{
