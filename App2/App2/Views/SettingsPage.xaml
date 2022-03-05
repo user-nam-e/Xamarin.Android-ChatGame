@@ -14,9 +14,17 @@
             <TableView Grid.Row="0" HasUnevenRows="True">
                 <TableView.Root>
                     <TableSection>
-                        <SwitchCell x:Name="animationGradientSwitch" 
+                        <SwitchCell x:Name="animationGradientSwitch"
                                     Text="Анимация градиента на главном экране"
-                                    OnChanged="animationGradientSwitch_OnChanged"/>
+                                    OnChanged="AnimationGradientSwitch_OnChanged"/>
+                        <SwitchCell x:Name="localDataSwitch"
+                                    Text="Использовать локальную базу данных"
+                                    OnChanged="LocalDataSwitch_OnChanged"/>
+                        <ViewCell>
+                            <Button x:Name="editPlayer" Text="Изменить имя профиля" BackgroundColor="#81FBB8" TextColor="#574928" TextTransform="None"
+                                    HorizontalOptions="Fill" VerticalOptions="Center" 
+                                    FontSize="15" Clicked="editPlayer_Clicked"/>
+                        </ViewCell>
                     </TableSection>
                 </TableView.Root>
             </TableView>

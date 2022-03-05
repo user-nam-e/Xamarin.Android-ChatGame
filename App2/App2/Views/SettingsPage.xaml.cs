@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App2.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,6 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using static Android.Renderscripts.Element;
 
 namespace App2
 {
@@ -16,12 +16,23 @@ namespace App2
         public SettingsPage()
         {
             InitializeComponent();
-
             animationGradientSwitch.On = Preferences.Get("animationGradientSwitch", true);
+            localDataSwitch.On = Preferences.Get("localDataSwitch", true);
         }
-        private async void animationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
+
+        private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
         {
             Preferences.Set("animationGradientSwitch", animationGradientSwitch.On);
+        }
+
+        private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
+        {
+            Preferences.Set("localDataSwitch", localDataSwitch.On);
+        }
+
+        private async void editPlayer_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditPlayerPage(), false);
         }
     }
 }

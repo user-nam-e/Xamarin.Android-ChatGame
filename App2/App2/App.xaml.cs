@@ -2,17 +2,11 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using Microsoft.AspNetCore.SignalR.Client;
+using System.Collections.Generic;
 
 namespace App2
 {
-    public class City
-    {
-        public string NameCity { get; set; }
-        public string NameCountry { get; set; }
-        public string Id { get; set; }
-        public string BotNameCity { get; set; }
-        public string BotId { get; set; }
-    }
     public partial class App : Application
     {
         public App()
@@ -28,7 +22,19 @@ namespace App2
 
         protected override void OnStart() { }
 
-        protected override void OnSleep() { }
+        protected override void OnSleep()
+        {
+            //App2.Views.SelectPlayerPage.
+            if (Views.SelectPlayerPage.hubConnection != null)
+            {
+                if (Views.SelectPlayerPage.hubConnection.State == HubConnectionState.Connected)
+                {
+                    Views.SelectPlayerPage.hubConnection.SendAsync("RemoveUser");
+                }
+            }
+
+            base.OnSleep();
+        }
 
         protected override void OnResume() { }
     }

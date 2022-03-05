@@ -21,7 +21,7 @@
                       Grid.Row="1" Grid.RowSpan="9">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ImageCell Text="{Binding NameCity}" TextColor="Black" ImageSource = "{Binding Id}" Height="48" IsEnabled="False"/>
+                        <ImageCell Text="{Binding CityName}" TextColor="Black" ImageSource = "{Binding FlagId}" Height="48" IsEnabled="False"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

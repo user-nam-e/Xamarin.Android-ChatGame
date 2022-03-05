@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.SelectPlayerPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Выбор игрока"
+                   TextColor="White" 
+                   FontSize="Title" VerticalOptions="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#81FBB8">
+            <SearchBar x:Name="PlayersSearchBar"
+                       Grid.Row="0" WidthRequest="120"
+                       TextChanged="PlayersSearchBar_TextChanged"
+                       Placeholder="Поиск игрока" />
+            <ListView x:Name="playersListView" SeparatorVisibility="Default" CachingStrategy="RecycleElement"
+                      SeparatorColor="Black" HasUnevenRows="True" VerticalScrollBarVisibility="Always" 
+                      Grid.Row="1" Grid.RowSpan="9">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="75">
+                            <Button Text="{Binding PlayerName}" BackgroundColor="#81FBB8" TextColor="#285528" FontSize="20" TextTransform="None" FontAttributes="Bold"
+                                    HorizontalOptions="Fill" VerticalOptions="Fill" BorderWidth="0" Margin="5, 5, 5, 5" BorderColor="Transparent" ImageSource="user_80pxGr" Clicked="buttonPlayer_Clicked"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

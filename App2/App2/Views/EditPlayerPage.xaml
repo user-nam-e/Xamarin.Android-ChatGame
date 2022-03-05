@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.EditPlayerPage"
+             Title="Настройка профиля">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="60" />
+                <Setter Property="HeightRequest" Value="59"/>
+                <Setter Property="WidthRequest" Value="270"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="#90f7ec" />
+                <Setter Property="TextColor" Value="#28C76F"/>
+                <Setter Property="BorderColor" Value="#28C76F"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+
+            <Grid BackgroundColor="#81FBB8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="1" CornerRadius="50" Margin="15, 0, 15, 0" BackgroundColor="#90f7ec" BorderColor="#28C76F">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="Введите ваше новое имя: " BackgroundColor="Transparent" FontSize="23" FontAttributes="Bold" TextColor="#28C76F" HorizontalOptions="Center"/>
+                        <Frame Grid.Row="1" Grid.RowSpan="2" BackgroundColor="Transparent" CornerRadius="30">
+                            <Entry x:Name="EntryName" Grid.Row="2" TextColor="Black" BackgroundColor="Transparent" FontSize="Large" Completed="EntryName_Completed">
+
+                            </Entry>
+                        </Frame>
+
+                    </Grid>
+                </Frame>
+                <Button x:Name="ButtonSetting" Text="Сохранить" Style="{StaticResource buttonStyle}" 
+                        Grid.Row="2" VerticalOptions="Start" Margin="0, 25, 0, 0" FontSize="24" FontAttributes="Bold" Clicked="EntryName_Completed"/>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

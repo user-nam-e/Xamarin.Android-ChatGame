@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.IO;
 using Xamarin.Essentials;
+using Microsoft.AspNetCore.SignalR.Client;
+using App2.Views;
 
 namespace App2
 {
@@ -16,19 +18,22 @@ namespace App2
         {
             InitializeComponent();
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            AnimateBackGround();
+            AnimateBackGroundAsync();
         }
 
-        private async void AnimateBackGround()
+        private async void AnimateBackGroundAsync()
         {
             if (Preferences.Get("animationGradientSwitch", false))
             {
                 await Task.Delay(3000);
+
                 Action<double> forward = input => bdGradient.AnchorY = input;
                 Action<double> backward = input => bdGradient.AnchorY = input;
+
                 while (Preferences.Get("animationGradientSwitch", true))
                 {
                     bdGradient.Animate(name: "forward", callback: forward, start: 0, end: 1, length: 5000, easing: Easing.SinIn);
@@ -38,14 +43,17 @@ namespace App2
                 }
             }
         }
+
         private async void ButtonPlay_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GamePage(), false);
+            await Navigation.PushAsync(new SelectGModePage(), false);
         }
+
         private async void ButtonCities_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new CitiesPage(), false);
         }
+
         private async void ButtonSetting_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SettingsPage(), false);

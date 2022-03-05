@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App2.Views.SelectGModePage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Выбор игрового режима"
+                   TextColor="White"
+                   FontSize="Title" VerticalOptions="Center"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="#3de5a7" />
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        
+        <Grid BackgroundColor="#81FBB8" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition />
+                <RowDefinition Height="10"/>
+                <RowDefinition />
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="ButtonPlayWithBot" Text="" Style="{StaticResource buttonStyle}" 
+                         Grid.Row="1" ImageSource="Arobot_240px" Clicked="ButtonPlayWithBot_Clicked"/>
+            <Button x:Name="ButtonPlayWithPlayer" Text="" Style="{StaticResource buttonStyle}" 
+                         Grid.Row="3" ImageSource="user_240px" Clicked="ButtonPlayWithPlayer_Clicked"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
