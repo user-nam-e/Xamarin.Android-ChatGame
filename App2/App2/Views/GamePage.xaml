@@ -12,7 +12,7 @@
                 <Setter Property="WidthRequest" Value="95"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="BackgroundColor" Value="#6adea0" />
-                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BorderColor" Value="White" />
                 <Setter Property="BorderWidth" Value="2"/>
             </Style>
         </ResourceDictionary>
@@ -62,11 +62,26 @@
 
             <Grid Grid.Row="4" BackgroundColor="White">
                 <Grid BackgroundColor="#6adea0" Margin="2.5">
-                    <Entry x:Name="entryText" Placeholder="Введите город" 
-                           HeightRequest="59" VerticalOptions="Center" ReturnType="Default"
-                           BackgroundColor="White" TextColor="Black" 
-                           Margin="20" HorizontalOptions="FillAndExpand" Completed="EntryText_Completed">
-                    </Entry>
+                    <Frame Padding = "0,0,0,0" Margin="16" CornerRadius ="35" BorderColor="Black" HasShadow="True"
+                     IsClippedToBounds="False" HeightRequest="81" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Entry Grid.Column="0" Grid.ColumnSpan="1" HorizontalTextAlignment="Start" 
+                                   x:Name="entryText" Placeholder="Введите город" 
+                                   ReturnType="Default"
+                                   BackgroundColor="White" TextColor="Black" 
+                                   Margin="15, 15, 0, 15"  Completed="EntryText_Completed">
+                            </Entry>
+                            <ImageButton Grid.Column="1" BackgroundColor="#6adea0" Margin="10,15,25,15" 
+                                         CornerRadius="200" BorderColor="Black" BorderWidth="1" 
+                                         Padding="10" Source="plus_math_60px"
+                                         Clicked="EntryText_Completed"/>
+                        </Grid>
+                    </Frame>
                 </Grid>
             </Grid>
         </Grid>

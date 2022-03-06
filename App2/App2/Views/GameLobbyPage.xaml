@@ -19,22 +19,24 @@
 
     <ContentPage.Content>
         <Grid BackgroundColor="#81FBB8">
-            <Grid Grid.Row="0" BackgroundColor="#6adea0">
-                <ImageButton x:Name="ButtonPlayer2Left" HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}" 
+            <Grid Grid.Row="0" BackgroundColor="White">
+                <Grid BackgroundColor="#6adea0"  Margin="2.5">
+                    <ImageButton x:Name="ButtonPlayer2Left" HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}" 
                              Source="user_240px" Padding="5" Grid.Column="0" Grid.RowSpan="2"/>
 
-                <Button x:Name="Hint" Grid.Column="1" Grid.Row="0" Clicked="Hint_Clicked"
+                    <Button x:Name="Hint" Grid.Column="1" Grid.Row="0" Clicked="Hint_Clicked"
                         BorderWidth="2" BorderColor="White" 
                         TextColor="White" Text="Подсказка"
-                        VerticalOptions="Center" BackgroundColor="#6adea0"/>
+                        VerticalOptions="Center" BackgroundColor="#6adea0" Margin="0, 7, 0, 0"/>
 
-                <Button x:Name="test" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
+                    <Button x:Name="test" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
                         BorderWidth="2" BorderColor="White" 
                         TextColor="White" Text="Меню" 
-                        VerticalOptions="Start" BackgroundColor="#6adea0"/>
+                        VerticalOptions="Start" BackgroundColor="#6adea0" Margin="0, 0, 0, 7"/>
 
-                <ImageButton x:Name="ButtonPlayer1Right" HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}"
+                    <ImageButton x:Name="ButtonPlayer1Right" HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}"
                              Source="user_240px" Padding="3" Grid.Column="2" Grid.RowSpan="2"/>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1" Grid.RowSpan="3">
                 <ListView x:Name="GameListView" HasUnevenRows="True" SeparatorVisibility="None" HorizontalOptions="Center">
@@ -46,10 +48,6 @@
                                             BorderWidth="2" BorderColor="Green" 
                                             HorizontalOptions="End" Margin="0, 0, 12, 0"/>
                                     <Button BackgroundColor="Transparent" HeightRequest="8"/>
-                                    <!--<Button Text="{Binding SecondCityName}" ImageSource="{Binding SecondFlagId}" BackgroundColor="DeepSkyBlue"
-                                            BorderWidth="2" BorderColor="green"
-                                            HorizontalOptions="Start" Margin="12, 0, 0, 0" />
-                                    <Button BackgroundColor="Transparent" HeightRequest="14"/>-->
                                 </StackLayout>
                             </ViewCell>
 
@@ -58,13 +56,29 @@
                 </ListView>
             </Grid>
 
-            <Grid Grid.Row="4" BackgroundColor="#6adea0"> 
-                <Button BackgroundColor="Black" VerticalOptions="Start" HeightRequest="1"/>
-                <Entry x:Name="entryText" Placeholder="Введите город" 
-                           HeightRequest="59" VerticalOptions="Center" ReturnType="Default"
-                           BackgroundColor="White" TextColor="Black" 
-                           Margin="20" HorizontalOptions="FillAndExpand" Completed="EntryText_Completed">
-                </Entry>
+            <Grid Grid.Row="4" BackgroundColor="White">
+                <Grid BackgroundColor="#6adea0" Margin="2.5">
+                    <Frame Padding = "0,0,0,0" Margin="16" CornerRadius ="35" BorderColor="Black" HasShadow="True"
+                     IsClippedToBounds="False" HeightRequest="81" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Entry Grid.Column="0" Grid.ColumnSpan="1" HorizontalTextAlignment="Start" 
+                                   x:Name="entryText" Placeholder="Введите город" 
+                                   ReturnType="Default"
+                                   BackgroundColor="White" TextColor="Black" 
+                                   Margin="15, 15, 0, 15"  Completed="EntryText_Completed">
+                            </Entry>
+                            <ImageButton Grid.Column="1" BackgroundColor="#6adea0" Margin="10,15,25,15" 
+                                         CornerRadius="200" BorderColor="Black" BorderWidth="1" 
+                                         Padding="10" Source="plus_math_60px"
+                                         Clicked="EntryText_Completed"/>
+                        </Grid>
+                    </Frame>
+                </Grid>
             </Grid>
         </Grid>
     </ContentPage.Content>

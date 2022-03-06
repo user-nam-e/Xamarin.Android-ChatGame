@@ -21,19 +21,53 @@ namespace App2
     {
         HubConnection hubConnection;
         ObservableCollection<City> cities = new ObservableCollection<City>();
+        List<City> suggestions = new List<City>();
 
         public CitiesPage()
         {
             InitializeComponent();
 
+            CheckCityCount();
             if (Preferences.Get("localDataSwitch", true))
             {
                 XmlLoadAsync();
             }
             else
             {
+                labelLoad.IsVisible = true;
+                imageGif.IsVisible = true;
                 AzureLoadAsync();
+                LoadGif();
             }
+        }
+
+        async void CheckCityCount()
+        {
+            while (true)
+            {
+                if (suggestions.Count != 0)
+                {
+                    countOfCities.Text = suggestions.Count.ToString();
+                }
+                else
+                {
+                    countOfCities.Text = cities.Count.ToString();
+                }
+
+                await Task.Delay(1000);
+            }
+        }
+
+        async void LoadGif()
+        {
+            while (cities.Count == 0)
+            {
+                await Task.Delay(1500);
+            }
+
+            labelLoad.IsVisible = false;
+            imageGif.IsVisible = false;
+            citiesListView.ItemsSource = cities;
         }
 
         async void AzureLoadAsync()
@@ -52,7 +86,6 @@ namespace App2
             {
                 await hubConnection.StartAsync();
                 await hubConnection.SendAsync("GetCities");
-                citiesListView.ItemsSource = cities;
             }
             catch (Exception ex)
             {
@@ -85,7 +118,7 @@ namespace App2
         private void CitiesSearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             var keyword = CitiesSearchBar.Text;
-            var suggestions = cities.Where(c => c.CityName.ToLower().Contains(keyword.ToLower()));
+            suggestions = cities.Where(c => c.CityName.ToLower().Contains(keyword.ToLower())).ToList();
             citiesListView.ItemsSource = suggestions;
         }
     }

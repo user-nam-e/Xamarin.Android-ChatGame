@@ -79,7 +79,7 @@ namespace App2
 
         private void EntryText_Completed(object sender, EventArgs e)
         {
-            entryText.Focus();
+            //entryText.Focus();
 
             try
             {

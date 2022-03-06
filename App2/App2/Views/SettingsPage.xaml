@@ -26,7 +26,7 @@
             <TableView Grid.Row="0" HasUnevenRows="True" BackgroundColor="Transparent">
                 <TableView.Root>
                     <TableSection>
-                        <!--<ViewCell Height="80">
+                        <ViewCell Height="80">
                             <Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -49,8 +49,8 @@
                                             Toggled="AnimationGradientSwitch_OnChanged"/>
                                 </Grid>
                             </Grid>
-                        </ViewCell>-->
-                        <!--<ViewCell Height="80">
+                        </ViewCell>
+                        <ViewCell Height="80">
                             <Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -72,7 +72,7 @@
                                             Toggled="LocalDataSwitch_OnChanged"/>
                                 </Grid>
                             </Grid>
-                        </ViewCell>-->
+                        </ViewCell>
                         <ViewCell Height="80">
                             <Grid>
                                 <Grid.GestureRecognizers>
@@ -99,15 +99,6 @@
                                 </Grid>
                             </Grid>
                         </ViewCell>
-                        <!--<Button x:Name="editPlayer" Text="Изменить имя профиля" BackgroundColor="#81FBB8" TextColor="#574928" TextTransform="None"
-                                    HorizontalOptions="Fill" VerticalOptions="Fill" 
-                                    FontSize="15" Clicked="editPlayer_Clicked"/>-->
-                        <!--
-                        </ViewCell>
-                        <ViewCell>
-                            <Switch IsToggled="true" VerticalOptions="CenterAndExpand" 
-             HorizontalOptions="Center" />
-                        </ViewCell>-->
                     </TableSection>
                 </TableView.Root>
             </TableView>

@@ -22,11 +22,11 @@ namespace App2
 
         protected override void OnAppearing()
         {
-            //animationGradientSwitch.IsToggled = Preferences.Get("animationGradientSwitch", true);
-            //localDataSwitch.IsToggled = Preferences.Get("localDataSwitch", true);
+            animationGradientSwitch.IsToggled = Preferences.Get("animationGradientSwitch", true);
+            localDataSwitch.IsToggled = Preferences.Get("localDataSwitch", true);
 
-            //animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
-            //localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
+            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
+            localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
 
             currentName.Text = Preferences.Get("playerName", "");
             base.OnAppearing();
@@ -37,18 +37,18 @@ namespace App2
             await Navigation.PushAsync(new EditPlayerPage(), false);
         }
 
-        //private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
-        //{
-        //    Preferences.Set("animationGradientSwitch", animationGradientSwitch.IsToggled);
+        private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
+        {
+            Preferences.Set("animationGradientSwitch", animationGradientSwitch.IsToggled);
 
-        //    animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
-        //}
+            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
+        }
 
-        //private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
-        //{
-        //    Preferences.Set("localDataSwitch", localDataSwitch.IsToggled);
+        private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
+        {
+            Preferences.Set("localDataSwitch", localDataSwitch.IsToggled);
 
-        //    localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
-        //}
+            localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
+        }
     }
 }
