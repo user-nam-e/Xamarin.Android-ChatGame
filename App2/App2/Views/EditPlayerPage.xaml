@@ -21,17 +21,28 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    <ContentPage.Content>
-        <ScrollView>
 
-            <Grid BackgroundColor="#81FBB8">
+    <ContentPage.Content>
+        <Grid>
+            <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
+            <BoxView.Background>
+                <LinearGradientBrush >
+                    <GradientStop Color="#abdcff" Offset="0.3"/>
+                    <GradientStop Color="#81FBB8" Offset="0.5"/>
+                    <GradientStop Color="#90f7ec" Offset="1.0"/>
+                    <GradientStop Color="#28C76F" Offset="0.3"/>
+                </LinearGradientBrush>
+            </BoxView.Background>
+            </BoxView>
+            
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition />
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Frame Grid.Row="1" CornerRadius="50" Margin="15, 0, 15, 0" BackgroundColor="#90f7ec" BorderColor="#28C76F">
+                <Frame Grid.Row="1" Grid.RowSpan="2" CornerRadius="50" Margin="15, 0, 15, 0" BackgroundColor="#90f7ec" BorderColor="#28C76F">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -40,7 +51,7 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Text="Введите ваше новое имя: " BackgroundColor="Transparent" FontSize="23" FontAttributes="Bold" TextColor="#28C76F" HorizontalOptions="Center"/>
                         <Frame Grid.Row="1" Grid.RowSpan="2" BackgroundColor="Transparent" CornerRadius="30">
-                            <Entry x:Name="EntryName" Grid.Row="2" TextColor="Black" BackgroundColor="Transparent" FontSize="Large" Completed="EntryName_Completed">
+                            <Entry x:Name="EntryName" Grid.Row="2" TextColor="Black" BackgroundColor="Transparent" FontSize="Large" Completed="EntryName_Completed" HorizontalTextAlignment="Center">
 
                             </Entry>
                         </Frame>
@@ -48,8 +59,8 @@
                     </Grid>
                 </Frame>
                 <Button x:Name="ButtonSetting" Text="Сохранить" Style="{StaticResource buttonStyle}" 
-                        Grid.Row="2" VerticalOptions="Start" Margin="0, 25, 0, 0" FontSize="24" FontAttributes="Bold" Clicked="EntryName_Completed"/>
+                        Grid.Row="3" VerticalOptions="Start" Margin="0, 25, 0, 0" FontSize="24" FontAttributes="Bold" Clicked="EntryName_Completed"/>
             </Grid>
-        </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

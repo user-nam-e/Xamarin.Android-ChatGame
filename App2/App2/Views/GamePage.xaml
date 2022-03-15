@@ -30,7 +30,7 @@
                         TextColor="White" Text="Подсказка"
                         VerticalOptions="Center" BackgroundColor="#6adea0" Margin="0, 7, 0, 0"/>
 
-                    <Button x:Name="test" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
+                    <Button x:Name="Menu" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
                         BorderWidth="2" BorderColor="White" 
                         TextColor="White" Text="Меню" 
                         VerticalOptions="Start" BackgroundColor="#6adea0" Margin="0, 0, 0, 7"/>
@@ -63,7 +63,7 @@
             <Grid Grid.Row="4" BackgroundColor="White">
                 <Grid BackgroundColor="#6adea0" Margin="2.5">
                     <Frame Padding = "0,0,0,0" Margin="16" CornerRadius ="35" BorderColor="Black" HasShadow="True"
-                     IsClippedToBounds="False" HeightRequest="81" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                           IsClippedToBounds="False" HeightRequest="81" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>

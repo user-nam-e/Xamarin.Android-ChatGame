@@ -21,8 +21,21 @@ namespace App2.Views
 
         private async void EntryName_Completed(object sender, EventArgs e)
         {
-            Preferences.Set("playerName", EntryName.Text);
-            await Navigation.PopAsync();
+            if (EntryName.Text.Length > 12)
+            {
+                await DisplayAlert("Внимание", "Имя не может быть длинее 12 символов ¯\\_(ツ)_/¯", "ok");
+                EntryName.Text = Preferences.Get("playerName", "");
+            }
+            else if (EntryName.Text.Contains(' '))
+            {
+                await DisplayAlert("Внимание", "Имя не может содержать пустые символы ¯\\_(ツ)_/¯", "ok");
+                EntryName.Text = Preferences.Get("playerName", "");
+            }
+            else
+            {
+                Preferences.Set("playerName", EntryName.Text);
+                await Navigation.PopAsync();
+            }
         }
     }
 }

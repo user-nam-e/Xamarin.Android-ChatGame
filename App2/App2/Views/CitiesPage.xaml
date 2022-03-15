@@ -34,7 +34,7 @@
                 </Grid>
             </Grid>
 
-            <Image x:Name="imageGif" Grid.Row="4" VerticalOptions="Center" Source="fgif.gif" IsAnimationPlaying="True" IsVisible="false"/>
+            <Image x:Name="imageGif" Grid.Row="4" VerticalOptions="Center" Source="fgif2.gif" IsAnimationPlaying="True" IsVisible="false"/>
             <Label x:Name="labelLoad" Text="Загрузка" TextColor="Gray" Grid.Row="5" HorizontalOptions="Center" FontSize="13" IsVisible="false"/>
             <ListView x:Name="citiesListView" SeparatorVisibility="Default" CachingStrategy="RecycleElement"
                       SeparatorColor="Black" HasUnevenRows="True" VerticalScrollBarVisibility="Always" 

@@ -18,7 +18,8 @@ namespace App2.Views
     {
         Player player1Right { get; set; }
         Player player2Left { get; set; }
-        ObservableCollection<City> usedСities = new ObservableCollection<City>();
+        ObservableCollection<City> usedСitiesRight = new ObservableCollection<City>();
+        ObservableCollection<City> usedСitiesLeft = new ObservableCollection<City>();
         ObservableCollection<City> allСities = new ObservableCollection<City>();
         bool accesToWrite;
 
@@ -29,7 +30,7 @@ namespace App2.Views
             HubHandler();
 
             //AzureLoadAsync();
-            
+
             XmlLoadAsync();
 
 
@@ -37,7 +38,8 @@ namespace App2.Views
             player2Left = new Player() { ConnectionId = left, PlayerName = leftName };
             accesToWrite = acces;
 
-            GameListView.ItemsSource = usedСities;
+            GameListViewRight.ItemsSource = usedСitiesRight;
+            GameListViewLeft.ItemsSource = usedСitiesLeft;
         }
 
 
@@ -75,7 +77,10 @@ namespace App2.Views
 
                 SelectPlayerPage.hubConnection.On<GameCity>("ReceiveMessageFromUser", (city) =>
                 {
-                    usedСities.Add(new City() { CityName = city.CityName, FlagId = city.FlagId });
+                    usedСitiesLeft.Add(new City() { CityName = city.CityName, FlagId = city.FlagId });
+
+                    GameListViewLeft.ScrollTo(usedСitiesLeft.Last(), ScrollToPosition.End, true);
+
                     accesToWrite = true;
                 });
 
@@ -96,9 +101,9 @@ namespace App2.Views
                     {
                         var currentCity = new City();
 
-                        if (usedСities.Count > 0)
+                        if (usedСitiesRight.Count > 0)
                         {
-                            City lastCity = usedСities.Last();
+                            City lastCity = usedСitiesLeft.Last();
                             lastCity.CityName = lastCity.CityName.Trim('ь', 'ы');
 
                             currentCity = allСities
@@ -114,7 +119,10 @@ namespace App2.Views
                         }
 
                         accesToWrite = false;
-                        usedСities.Add(currentCity);
+                        usedСitiesRight.Add(currentCity);
+
+                        GameListViewRight.ScrollTo(usedСitiesRight.Last(), ScrollToPosition.End, true);
+
                         await SelectPlayerPage.hubConnection.SendAsync("SendMessageToUser", player2Left.ConnectionId,
                             new GameCity() { CityName = currentCity.CityName, FlagId = currentCity.FlagId });
                     }
@@ -165,7 +173,7 @@ namespace App2.Views
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                var result = await this.DisplayAlert("ВНИМАНИЕ", $"Завершить игру и выйти в главное меню?{allСities.Count}", "Да", "Нет");
+                var result = await this.DisplayAlert("ВНИМАНИЕ", $"Завершить игру и выйти в главное меню?", "Да", "Нет");
                 //if (result) await this.Navigation.PopAsync(); // or anything else
                 if (result)
                 {
@@ -190,7 +198,7 @@ namespace App2.Views
                 }
             });
         }
-        
+
         private async void CheckAcces()
         {
             while (true)

@@ -26,19 +26,30 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        
-        <Grid BackgroundColor="#81FBB8" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10"/>
-                <RowDefinition />
-                <RowDefinition Height="10"/>
-                <RowDefinition />
-                <RowDefinition Height="10"/>
-            </Grid.RowDefinitions>
-            <Button x:Name="ButtonPlayWithBot" Text="" Style="{StaticResource buttonStyle}" 
+        <Grid>
+            <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
+                <BoxView.Background>
+                    <LinearGradientBrush >
+                        <GradientStop Color="#abdcff" Offset="0.3"/>
+                        <GradientStop Color="#81FBB8" Offset="0.5"/>
+                        <GradientStop Color="#90f7ec" Offset="1.0"/>
+                        <GradientStop Color="#28C76F" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            <Grid  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition />
+                    <RowDefinition Height="10"/>
+                    <RowDefinition />
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="ButtonPlayWithBot" Text="" Style="{StaticResource buttonStyle}" 
                          Grid.Row="1" ImageSource="Arobot_240px" Clicked="ButtonPlayWithBot_Clicked"/>
-            <Button x:Name="ButtonPlayWithPlayer" Text="" Style="{StaticResource buttonStyle}" 
+                <Button x:Name="ButtonPlayWithPlayer" Text="" Style="{StaticResource buttonStyle}" 
                          Grid.Row="3" ImageSource="user_240px" Clicked="ButtonPlayWithPlayer_Clicked"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

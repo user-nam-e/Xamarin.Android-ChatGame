@@ -23,6 +23,27 @@ namespace App2.Views
         public SelectPlayerPage()
         {
             InitializeComponent();
+            LoadGif();
+        }
+
+        async void LoadGif()
+        {
+            while (true)
+            {
+                if (players.Count == 0)
+                {
+                    labelLoad.IsVisible = true;
+                    imageGif.IsVisible = true;
+                }
+                else
+                {
+                    labelLoad.IsVisible = false;
+                    imageGif.IsVisible = false;
+                }
+
+                await Task.Delay(200);
+            }
+
         }
 
         protected override void OnAppearing()
@@ -91,7 +112,7 @@ namespace App2.Views
                 });
 
             });
-            
+
             hubConnection.On<List<Player>>("GetConnectedUsers", (users) =>
             {
                 players.Clear();
@@ -105,10 +126,10 @@ namespace App2.Views
                 }
             });
 
-
             try
             {
                 await hubConnection.StartAsync();
+
                 await hubConnection.SendAsync("AddUser", Preferences.Get("playerName", ""));
             }
             catch (Exception ex)
@@ -141,14 +162,12 @@ namespace App2.Views
 
         private async void buttonPlayer_Clicked(object sender, EventArgs e)
         {
-            Player selectedPlayer = (Player)((Button)sender).BindingContext;
+            Player selectedPlayer = (Player)((ViewCell)sender).BindingContext;
 
             try
             {
                 if (selectedPlayer != null)
                 {
-                    //await DisplayAlert($"{selectedPlayer.ConnectionId} {selectedPlayer.PlayerName}", "ok", "ok");
-                    //targetUserId, sendersName, requestUserId
                     await hubConnection.SendAsync("SendRequestToPlay", selectedPlayer.ConnectionId, Preferences.Get("playerName", ""), hubConnection.ConnectionId);
                 }
             }

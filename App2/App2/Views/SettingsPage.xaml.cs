@@ -20,6 +20,11 @@ namespace App2
             InitializeComponent();
         }
 
+        private async void EditPlayer_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new EditPlayerPage(), false);
+        }
+
         protected override void OnAppearing()
         {
             animationGradientSwitch.IsToggled = Preferences.Get("animationGradientSwitch", true);
@@ -29,12 +34,28 @@ namespace App2
             localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
 
             currentName.Text = Preferences.Get("playerName", "");
+
+            var timer = Preferences.Get("timerValue", 60);
+            {
+                if (timer == 60)
+                {
+                    currentTimer.Text = "1 мин";
+                }
+                else if (timer == 120)
+                {
+                    currentTimer.Text = "2 мин";
+                }
+                else if (timer == 300)
+                {
+                    currentTimer.Text = "5 мин";
+                }
+                else if (timer == -1)
+                {
+                    currentTimer.Text = "Выкл";
+                }
+            }
+
             base.OnAppearing();
-        }
-        
-        private async void EditPlayer_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new EditPlayerPage(), false);
         }
 
         private void AnimationGradientSwitch_OnChanged(object sender, ToggledEventArgs e)
@@ -49,6 +70,33 @@ namespace App2
             Preferences.Set("localDataSwitch", localDataSwitch.IsToggled);
 
             localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
+        }
+
+        private async void EditTimer_Tapped(object sender, EventArgs e)
+        {
+            var action = await DisplayActionSheet("Таймер хода", "Отмена", "", "Выкл", "1 мин", "2 мин", "5 мин");
+
+            if (action != null && action != "Отмена")
+            {
+                if (action == "Выкл")
+                {
+                    Preferences.Set("timerValue", -1);
+                }
+                else if (action == "1 мин")
+                {
+                    Preferences.Set("timerValue", 60);
+                }
+                else if (action == "2 мин")
+                {
+                    Preferences.Set("timerValue", 120);
+                }
+                else if (action == "5 мин")
+                {
+                    Preferences.Set("timerValue", 300);
+                }
+
+                currentTimer.Text = action;
+            }
         }
     }
 }

@@ -73,30 +73,46 @@
                                 </Grid>
                             </Grid>
                         </ViewCell>
-                        <ViewCell Height="80">
+                        <ViewCell Height="80" Tapped="EditPlayer_Clicked">
                             <Grid>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="EditPlayer_Clicked"/>
-                                </Grid.GestureRecognizers>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition />
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition Height="33"/>
-                                    </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="33"/>
+                                </Grid.RowDefinitions>
 
-                                    <Label Margin="10,5,0,0" Grid.Column="0" Grid.ColumnSpan="2"
+                                <Label Margin="10,5,0,0" Grid.Column="0" Grid.ColumnSpan="2"
                                         Text="Редактировать игровое имя" FontSize="17" FontAttributes="Bold" TextColor="Black">
-                                    </Label>
+                                </Label>
 
-                                    <Label Text="Текущее имя:" Grid.Row="1" Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
-                                    <Label Grid.Row="1" Grid.Column="1"
+                                <Label Text="Текущее имя:" Grid.Row="1" Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
+                                <Label Grid.Row="1" Grid.Column="1"
                                             x:Name="currentName"  
                                             Margin="10,0,0,0" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
-                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                        <ViewCell Height="80" Tapped="EditTimer_Tapped">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="33"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Margin="10,5,0,0" Grid.Column="0" Grid.ColumnSpan="2"
+                                        Text="Редактировать таймер хода" FontSize="17" FontAttributes="Bold" TextColor="Black">
+                                </Label>
+
+                                <Label Text="Значение :" Grid.Row="1" Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
+                                <Label Grid.Row="1" Grid.Column="1"
+                                            x:Name="currentTimer"  
+                                            Margin="10,0,0,0" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
                             </Grid>
                         </ViewCell>
                     </TableSection>

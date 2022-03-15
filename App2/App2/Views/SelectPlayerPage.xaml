@@ -10,23 +10,51 @@
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <Grid BackgroundColor="#81FBB8">
-            <SearchBar x:Name="PlayersSearchBar"
-                       Grid.Row="0" WidthRequest="120"
+        <Grid>
+            <BoxView x:Name="bdGradient" Scale="4" AnchorX="1" AnchorY="0">
+                <BoxView.Background>
+                    <LinearGradientBrush >
+                        <GradientStop Color="#abdcff" Offset="0.3"/>
+                        <GradientStop Color="#81FBB8" Offset="0.5"/>
+                        <GradientStop Color="#90f7ec" Offset="1.0"/>
+                        <GradientStop Color="#28C76F" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            
+            <Grid>
+
+                <SearchBar x:Name="PlayersSearchBar"
+                       Grid.Row="0"
                        TextChanged="PlayersSearchBar_TextChanged"
                        Placeholder="Поиск игрока" />
-            <ListView x:Name="playersListView" SeparatorVisibility="Default" CachingStrategy="RecycleElement"
+
+
+                <Image x:Name="imageGif" Grid.Row="4" VerticalOptions="Center" Source="fgif2.gif" IsAnimationPlaying="True" IsVisible="true"/>
+                <Label x:Name="labelLoad" Text="Поиск игроков" TextColor="Gray" Grid.Row="5" HorizontalOptions="Center" FontSize="13" IsVisible="true"/>
+
+
+                <ListView x:Name="playersListView" SeparatorVisibility="Default" CachingStrategy="RecycleElement"
                       SeparatorColor="Black" HasUnevenRows="True" VerticalScrollBarVisibility="Always" 
                       Grid.Row="1" Grid.RowSpan="9">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="75">
-                            <Button Text="{Binding PlayerName}" BackgroundColor="#81FBB8" TextColor="#285528" FontSize="20" TextTransform="None" FontAttributes="Bold"
-                                    HorizontalOptions="Fill" VerticalOptions="Fill" BorderWidth="0" Margin="5, 5, 5, 5" BorderColor="Transparent" ImageSource="user_80pxGr" Clicked="buttonPlayer_Clicked"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="80" Tapped="buttonPlayer_Clicked">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ImageButton  BorderWidth="2" BorderColor="DarkGreen" CornerRadius="10" BackgroundColor="Transparent"
+                                              Grid.Column="0" Source="user_240pxDg" Margin="10,7,2,4"/>
+                                    <Label Grid.Column="1" Text="{Binding PlayerName}" FontSize="21" FontAttributes="Bold" TextColor="DarkGreen" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

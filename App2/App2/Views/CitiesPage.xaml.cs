@@ -45,25 +45,27 @@ namespace App2
         {
             while (true)
             {
+
                 if (suggestions.Count != 0)
                 {
                     countOfCities.Text = suggestions.Count.ToString();
+                }
+                else if (suggestions.Count == 0 && !string.IsNullOrEmpty(CitiesSearchBar.Text))
+                {
+                    countOfCities.Text = "0";
                 }
                 else
                 {
                     countOfCities.Text = cities.Count.ToString();
                 }
 
-                await Task.Delay(1000);
+                await Task.Delay(500);
             }
         }
 
         async void LoadGif()
         {
-            while (cities.Count == 0)
-            {
-                await Task.Delay(1500);
-            }
+            await Task.Delay(1500);
 
             labelLoad.IsVisible = false;
             imageGif.IsVisible = false;

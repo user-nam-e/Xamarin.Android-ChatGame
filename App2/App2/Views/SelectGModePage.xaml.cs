@@ -19,14 +19,11 @@ namespace App2.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             if (Views.SelectPlayerPage.hubConnection != null)
             {
-                if (Views.SelectPlayerPage.hubConnection.State == HubConnectionState.Connected)
-                {
-                    Views.SelectPlayerPage.hubConnection.SendAsync("RemoveUser");
-                }
+                await Views.SelectPlayerPage.hubConnection.SendAsync("RemoveUser");
             }
 
             base.OnAppearing();

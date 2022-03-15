@@ -38,24 +38,46 @@
                              Source="user_240px" Padding="3" Grid.Column="2" Grid.RowSpan="2"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Grid.RowSpan="3">
-                <ListView x:Name="GameListView" HasUnevenRows="True" SeparatorVisibility="None" HorizontalOptions="Center">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell IsEnabled="False">
-                                <StackLayout>
-                                    <Button Text="{Binding CityName}"  ImageSource="{Binding FlagId}" BackgroundColor="#6adea0"
+            
+            <!--1111111-->
+            <Grid x:Name="First" Grid.Row="1" Grid.RowSpan="3">
+                <Grid>
+                    <ListView x:Name="GameListViewLeft" Grid.Column="0" HasUnevenRows="True" SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell IsEnabled="False">
+                                    <StackLayout>
+                                        <Button BackgroundColor="Transparent" HeightRequest="80"/>
+                                        <Button Text="{Binding CityName}"  ImageSource="{Binding FlagId}" BackgroundColor="DeepSkyBlue"
                                             BorderWidth="2" BorderColor="Green" 
-                                            HorizontalOptions="End" Margin="0, 0, 12, 0"/>
-                                    <Button BackgroundColor="Transparent" HeightRequest="8"/>
-                                </StackLayout>
-                            </ViewCell>
+                                            HorizontalOptions="Start"  Margin="12, 0, 12, 0" />
+                                        <Button BackgroundColor="Transparent" HeightRequest="8"/>
+                                    </StackLayout>
+                                </ViewCell>
 
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <ListView x:Name="GameListViewRight" Grid.Column="1" HasUnevenRows="True" SeparatorVisibility="None" VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell IsEnabled="False">
+                                    <StackLayout>
+                                        <Button Text="{Binding CityName}"  ImageSource="{Binding FlagId}" BackgroundColor="#6adea0"
+                                            BorderWidth="2" BorderColor="Green" 
+                                            HorizontalOptions="End"  Margin="12, 0, 12, 0" />
+                                        <Button BackgroundColor="Transparent" HeightRequest="8"/>
+                                        <Button BackgroundColor="Transparent" HeightRequest="80"/>
+                                    </StackLayout>
+                                </ViewCell>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </Grid>
-
+            <!--1111111-->
             <Grid Grid.Row="4" BackgroundColor="White">
                 <Grid BackgroundColor="#6adea0" Margin="2.5">
                     <Frame Padding = "0,0,0,0" Margin="16" CornerRadius ="35" BorderColor="Black" HasShadow="True"

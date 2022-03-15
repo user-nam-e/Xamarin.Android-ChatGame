@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -17,6 +18,7 @@ namespace App2
         ObservableCollection<City> allСities = new ObservableCollection<City>();
         City currentCity = new City();
         int numberOfHints = 3;
+        int time;
 
         public GamePage()
         {
@@ -31,7 +33,46 @@ namespace App2
                 AzureLoadAsync();
             }
 
+            time = Preferences.Get("timerValue", 60);
+            {
+                if (time != -1)
+                {
+                    StartTimer();
+                    Menu.Text = time.ToString();
+                }
+            }
+
             GameListView.ItemsSource = usedСities;
+        }
+
+        void StartTimer()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                Menu.Text = time--.ToString();
+
+                if (time == -3)
+                {
+                    //DisplayAlert("Вы проиграли", "Время на ответ исчерпано ¯\\_(ツ)_/¯", "ok");
+                    return false;
+                }
+                else if (time < 0 && time != -2)
+                {
+                    DisplayAlert("Вы проиграли", "Время на ответ исчерпано ¯\\_(ツ)_/¯", "ok");
+                    Navigation.PopAsync(true);
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            });
+        }
+
+        void ResetTime()
+        {
+            time = Preferences.Get("timerValue", 60);
         }
 
         async void XmlLoadAsync()
@@ -104,6 +145,7 @@ namespace App2
                 usedСities.Add(currentCity);
                 allСities.Remove(currentCity);
                 GameListView.ScrollTo(usedСities.Last(), ScrollToPosition.End, true);
+                ResetTime();
             }
             catch (Exception)
             {
@@ -156,6 +198,7 @@ namespace App2
                     usedСities.Add(currentCity);
                     allСities.Remove(currentCity);
                     GameListView.ScrollTo(usedСities.Last(), ScrollToPosition.End, true);
+                    ResetTime();
 
                 }
                 catch (Exception ex)
@@ -168,10 +211,16 @@ namespace App2
 
         protected override bool OnBackButtonPressed()
         {
-            Device.BeginInvokeOnMainThread(async () => {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
                 var result = await this.DisplayAlert("ВНИМАНИЕ", "Завершить игру и выйти в главное меню?", "Да", "Нет");
                 //if (result) await this.Navigation.PopAsync(); // or anything else
-                if (result) await this.Navigation.PushAsync(new MainPage(), false);
+
+                if (result)
+                {
+                    time = -2;
+                    await this.Navigation.PushAsync(new MainPage(), false);
+                }
             });
 
             return true;
@@ -183,7 +232,12 @@ namespace App2
             {
                 var result = await this.DisplayAlert("ВНИМАНИЕ", "Завершить игру и выйти в главное меню?", "Да", "Нет");
                 //if (result) await this.Navigation.PopAsync();
-                if (result) await this.Navigation.PushAsync(new MainPage(), false);
+
+                if (result)
+                {
+                    time = -2;
+                    await this.Navigation.PushAsync(new MainPage(), false);
+                }
             });
         }
     }

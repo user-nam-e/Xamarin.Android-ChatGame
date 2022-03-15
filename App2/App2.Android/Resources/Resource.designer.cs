@@ -12010,7 +12010,7 @@ namespace App2.Droid
 			public const int Fcity_128px = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int fgif = 2131165402;
+			public const int fgif2 = 2131165402;
 			
 			// aapt resource value: 0x7F0700DB
 			public const int help2_48px = 2131165403;
@@ -12136,10 +12136,16 @@ namespace App2.Droid
 			public const int user_240px = 2131165443;
 			
 			// aapt resource value: 0x7F070104
-			public const int user_80px = 2131165444;
+			public const int user_240pxbl = 2131165444;
 			
 			// aapt resource value: 0x7F070105
-			public const int user_80pxGr = 2131165445;
+			public const int user_240pxDg = 2131165445;
+			
+			// aapt resource value: 0x7F070106
+			public const int user_80px = 2131165446;
+			
+			// aapt resource value: 0x7F070107
+			public const int user_80pxGr = 2131165447;
 			
 			static Drawable()
 			{
