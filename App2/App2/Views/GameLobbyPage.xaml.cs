@@ -59,7 +59,7 @@ namespace App2.Views
             {
                 time -= 0.5;
 
-                if (!time.ToString().Contains(","))
+                if (!time.ToString().Contains(",") && !time.ToString().Contains("."))
                 {
                     timerButton.Text = time.ToString();
                 }
@@ -180,6 +180,11 @@ namespace App2.Views
                                 .Where(x => x.CityName.ToLower().StartsWith(lastCity.CityName.Last().ToString()))
                                 .Where(x => x.CityName.ToLower() == entryText.Text.ToLower().Trim())
                                 .First();
+
+                            if (usedCities.Any(x => x.CityName.ToLower() == playerCity.CityName.ToLower()))
+                            {
+                                throw new Exception();
+                            }
                         }
                         else
                         {
