@@ -20,6 +20,7 @@ namespace App2.Views
     public partial class SelectPlayerPage : ContentPage
     {
         ObservableCollection<Player> players = new ObservableCollection<Player>();
+        List<Player> suggestions = new List<Player>();
         public static HubConnection hubConnection;
 
         public SelectPlayerPage()
@@ -50,6 +51,11 @@ namespace App2.Views
 
         protected override void OnAppearing()
         {
+            if (hubConnection != null)
+            {
+
+                countOfPlayers.Text = hubConnection.ConnectionId.Substring(0, 5);
+            }
             StartConnection();
             UpdatePlayers();
             playersListView.ItemsSource = players;
@@ -133,6 +139,7 @@ namespace App2.Views
                 await hubConnection.StartAsync();
 
                 await hubConnection.SendAsync("AddUser", Preferences.Get("playerName", ""));
+                countOfPlayers.Text = hubConnection.ConnectionId.Substring(0, 5);
             }
             catch (Exception ex)
             {
@@ -158,14 +165,14 @@ namespace App2.Views
         private void PlayersSearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             var keyword = PlayersSearchBar.Text;
-            var suggestions = players.Where(c => c.PlayerName.ToLower().Contains(keyword.ToLower()));
+            suggestions = players.Where(c => c.PlayerName.ToLower().Contains(keyword.ToLower())).ToList();
             playersListView.ItemsSource = suggestions;
         }
 
         private async void buttonPlayer_Clicked(object sender, EventArgs e)
         {
             Player selectedPlayer = (Player)((Xamarin.Forms.ViewCell)sender).BindingContext;
-            
+
             try
             {
                 if (selectedPlayer != null)

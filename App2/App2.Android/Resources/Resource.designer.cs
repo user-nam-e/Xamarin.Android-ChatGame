@@ -12507,16 +12507,22 @@ namespace App2.Droid
 			public const int tooltip_frame_light = 2131165489;
 			
 			// aapt resource value: 0x7F070132
-			public const int usend_16px = 2131165490;
+			public const int uenemy_240px = 2131165490;
 			
 			// aapt resource value: 0x7F070133
-			public const int usend_32px = 2131165491;
+			public const int update_50px = 2131165491;
 			
 			// aapt resource value: 0x7F070134
-			public const int user_240px = 2131165492;
+			public const int usend_16px = 2131165492;
 			
 			// aapt resource value: 0x7F070135
-			public const int user_240pxDg = 2131165493;
+			public const int usend_32px = 2131165493;
+			
+			// aapt resource value: 0x7F070136
+			public const int user_240px = 2131165494;
+			
+			// aapt resource value: 0x7F070137
+			public const int user_240pxDg = 2131165495;
 			
 			static Drawable()
 			{

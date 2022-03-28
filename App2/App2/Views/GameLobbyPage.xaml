@@ -89,7 +89,7 @@
             <Grid Grid.Row="0" BackgroundColor="White">
                 <Grid BackgroundColor="#6adea0"  Margin="2.5">
                     <ImageButton x:Name="ButtonPlayer2Left" HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}" 
-                             Source="user_240px" Padding="5" Grid.Column="0" Grid.RowSpan="2"/>
+                             Source="uenemy_240px.png" Padding="5" Grid.Column="0" Grid.RowSpan="2"/>
 
                     <Button x:Name="hintButton" Grid.Column="1" Grid.Row="0" Clicked="Hint_Clicked"
                         BorderWidth="2" BorderColor="White" FontSize="13" FontAttributes="Bold"

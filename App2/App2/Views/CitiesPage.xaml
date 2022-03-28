@@ -5,6 +5,11 @@
 
     <NavigationPage.TitleView>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Text="Города"
                    TextColor="White" 
                    FontSize="Title" 
@@ -18,6 +23,14 @@
                          BackgroundColor="#6adea0"
                          Margin="0,0,15,0" CornerRadius="20"
                          Clicked="helpButton_Clicked"/>
+            <ImageButton x:Name="updateButton"
+                         Source="update_50px.png"  Scale="1" 
+                         VerticalOptions="Start"
+                         HorizontalOptions="Start"
+                         Grid.Column="2"
+                         BackgroundColor="#6adea0"
+                         Margin="0,0,15,0" CornerRadius="20"
+                         Clicked="updateButton_Clicked"/>
         </Grid>
     </NavigationPage.TitleView>
     <ContentPage.Content>

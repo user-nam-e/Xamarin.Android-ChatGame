@@ -21,13 +21,50 @@
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
-            
+
             <Grid>
 
-                <SearchBar x:Name="PlayersSearchBar"
-                       Grid.Row="0"
+                <!--<Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <SearchBar x:Name="citiesSearchBar"
+                       TextChanged="CitiesSearchBar_TextChanged" VerticalOptions="Fill" HorizontalOptions="Fill"
+                       Placeholder="Введите город">
+                    </SearchBar>
+
+                    <Grid Grid.Column="1" BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label BackgroundColor="Transparent" Text="Городов: "  Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Fill" TextColor="Black" FontSize="17"/>
+                        <Label x:Name="countOfCities" BackgroundColor="Transparent" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Fill" TextColor="Gray" Margin="6,0,0,0" FontAttributes="Bold" FontSize="15"/>
+                    </Grid>
+                </Grid>-->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <SearchBar x:Name="PlayersSearchBar"
                        TextChanged="PlayersSearchBar_TextChanged"
                        Placeholder="Поиск игрока" />
+
+                    <Grid Grid.Column="1" BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label BackgroundColor="Transparent" Text="Ваш ID: "  Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Fill" TextColor="Black" FontSize="17"/>
+                        <Label x:Name="countOfPlayers" BackgroundColor="Transparent" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Fill" TextColor="Gray" Margin="6,0,0,0" FontAttributes="Bold" FontSize="15"/>
+                    </Grid>
+                </Grid>
 
 
                 <Image x:Name="imageGif" Grid.Row="4" VerticalOptions="Center" Source="fgif2.gif" IsAnimationPlaying="True" IsVisible="true"/>

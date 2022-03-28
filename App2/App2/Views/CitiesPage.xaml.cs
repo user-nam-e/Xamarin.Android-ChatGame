@@ -144,5 +144,12 @@ namespace App2
         {
             DisplayAlert("Поиск", "*А - поиск городов, начинающихся на букву 'А' \n\n!Г Беларусь -  поиск городов, начинающихся на букву 'Г' и расположенных в Беларуси", "OK");
         }
+
+        private void updateButton_Clicked(object sender, EventArgs e)
+        {
+            cities.Clear();
+
+            LoadData();
+        }
     }
 }
