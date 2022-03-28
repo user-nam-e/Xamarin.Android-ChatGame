@@ -30,10 +30,10 @@ namespace App2
             animationGradientSwitch.IsToggled = Preferences.Get("animationGradientSwitch", true);
             localDataSwitch.IsToggled = Preferences.Get("localDataSwitch", true);
 
-            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
-            localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
+            animationStateLabel.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
+            dataStateLabel.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
 
-            currentName.Text = Preferences.Get("playerName", "");
+            currentNameLabel.Text = Preferences.Get("playerName", "");
 
             var timer = Preferences.Get("timerValue", 60);
             {
@@ -62,14 +62,14 @@ namespace App2
         {
             Preferences.Set("animationGradientSwitch", animationGradientSwitch.IsToggled);
 
-            animationTurnOff.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
+            animationStateLabel.Text = Preferences.Get("animationGradientSwitch", true) ? "Вкл" : "Выкл";
         }
 
         private void LocalDataSwitch_OnChanged(object sender, ToggledEventArgs e)
         {
             Preferences.Set("localDataSwitch", localDataSwitch.IsToggled);
 
-            localTurnOff.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
+            dataStateLabel.Text = Preferences.Get("localDataSwitch", true) ? "Да" : "Нет";
         }
 
         private async void EditTimer_Tapped(object sender, EventArgs e)

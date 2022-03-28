@@ -1,11 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App2.GamePage"
+             x:Class="App2.Views.GamePage"
+             xmlns:local="clr-namespace:App2.Models;assembly=App2"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <DataTemplate x:Key="FromTemplate">
+                <ViewCell Height="55" IsEnabled="False">
+                    <ViewCell.View>
+                        <Frame BackgroundColor="White" CornerRadius="15" Margin="8,5,0,5"
+                                               BorderColor="White" IsClippedToBounds="True" Padding="2" 
+                                               HasShadow="False" HorizontalOptions="Start" VerticalOptions="End">
+                            <Frame Padding="0" BackgroundColor="White" CornerRadius="15" HasShadow="False">
+                                <Grid BackgroundColor="DeepSkyBlue">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ImageButton Source="{Binding FlagId}" Grid.Column="0" 
+                                                         BackgroundColor="Transparent" HorizontalOptions="End" 
+                                                         Scale="0.8" Clicked="EntryText_Completed"/>
+
+                                    <Label Grid.Column="1" Text="{Binding CityName}" FontSize="16"  
+                                                   FontAttributes="Bold" BackgroundColor="Transparent" 
+                                                   VerticalOptions="Center" TextColor="#2C2E2C"/>
+                                </Grid>
+                            </Frame>
+                        </Frame>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ToTemplate">
+                <ViewCell Height="55" IsEnabled="False">
+                    <ViewCell.View>
+                        <Frame BackgroundColor="White" CornerRadius="15" Margin="0,5,8,5"
+                                               BorderColor="White" IsClippedToBounds="True" Padding="2" 
+                                               HasShadow="False" HorizontalOptions="End" VerticalOptions="Start">
+                            <Frame Padding="0" BackgroundColor="White" CornerRadius="15" HasShadow="False">
+                                <Grid BackgroundColor="#6adea0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="5"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ImageButton Source="{Binding FlagId}" Grid.Column="0" 
+                                                         BackgroundColor="Transparent" HorizontalOptions="End" 
+                                                         Scale="0.8" Clicked="EntryText_Completed"/>
+
+                                    <Label Grid.Column="1" Text="{Binding CityName}" FontSize="16"  
+                                                   FontAttributes="Bold" BackgroundColor="Transparent" 
+                                                   VerticalOptions="Center" TextColor="#2C2E2C"/>
+
+                                </Grid>
+                            </Frame>
+                        </Frame>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <local:ChatDataTemplateSelector x:Key="chatDataTemplateSelector" FromTemplate="{StaticResource FromTemplate}" ToTemplate="{StaticResource ToTemplate}"/>
+
             <Style x:Key="buttonStyleOne" TargetType="ImageButton">
                 <Setter Property="CornerRadius" Value="250" />
                 <Setter Property="HeightRequest" Value="95"/>
@@ -18,19 +78,27 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+
     <ContentPage.Content>
+
         <Grid BackgroundColor="#81FBB8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+
             <Grid Grid.Row="0" BackgroundColor="White">
                 <Grid BackgroundColor="#6adea0"  Margin="2.5">
                     <ImageButton HorizontalOptions="Center" Style="{StaticResource buttonStyleOne}" 
                              Source="Abot_200px" Padding="5" Grid.Column="0" Grid.RowSpan="2"/>
 
-                    <Button x:Name="Hint" Grid.Column="1" Grid.Row="0" Clicked="Hint_Clicked"
-                        BorderWidth="2" BorderColor="White" 
-                        TextColor="White" Text="Подсказка"
+                    <Button x:Name="hintButton" Grid.Column="1" Grid.Row="0" Clicked="Hint_Clicked"
+                        BorderWidth="2" BorderColor="White" FontSize="13" FontAttributes="Bold"
+                        TextColor="White" Text="Подсказка (3)"
                         VerticalOptions="Center" BackgroundColor="#6adea0" Margin="0, 7, 0, 0"/>
 
-                    <Button x:Name="Menu" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
+                    <Button x:Name="timerButton" Grid.Column="1" Grid.Row="1" Clicked="CloseGamePage"
                         BorderWidth="2" BorderColor="White" 
                         TextColor="White" Text="Меню" 
                         VerticalOptions="Start" BackgroundColor="#6adea0" Margin="0, 0, 0, 7"/>
@@ -39,51 +107,41 @@
                              Source="user_240px" Padding="3" Grid.Column="2" Grid.RowSpan="2"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Grid.RowSpan="3">
-                <ListView x:Name="GameListView" HasUnevenRows="True" SeparatorVisibility="None" HorizontalOptions="Center">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell IsEnabled="False">
-                                <StackLayout>
-                                    <Button Text="{Binding CityName}"  ImageSource="{Binding FlagId}" BackgroundColor="#6adea0"
-                                            BorderWidth="2" BorderColor="Green" 
-                                            HorizontalOptions="End" Margin="0, 0, 12, 0"/>
-                                    <Button BackgroundColor="Transparent" HeightRequest="8"/>
-                                    <Button Text="{Binding SecondCityName}" ImageSource="{Binding SecondFlagId}" BackgroundColor="DeepSkyBlue"
-                                            BorderWidth="2" BorderColor="green"
-                                            HorizontalOptions="Start" Margin="12, 0, 0, 0" />
-                                    <Button BackgroundColor="Transparent" HeightRequest="14"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
 
-            <Grid Grid.Row="4" BackgroundColor="White">
-                <Grid BackgroundColor="#6adea0" Margin="2.5">
-                    <Frame Padding = "0,0,0,0" Margin="16" CornerRadius ="35" BorderColor="Black" HasShadow="True"
-                           IsClippedToBounds="False" HeightRequest="81" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <Entry Grid.Column="0" Grid.ColumnSpan="1" HorizontalTextAlignment="Start" 
-                                   x:Name="entryText" Placeholder="Введите город" 
-                                   ReturnType="Default"
-                                   BackgroundColor="White" TextColor="Black" 
-                                   Margin="15, 15, 0, 15"  Completed="EntryText_Completed">
-                            </Entry>
-                            <ImageButton Grid.Column="1" BackgroundColor="#6adea0" Margin="10,15,25,15" 
-                                         CornerRadius="200" BorderColor="Black" BorderWidth="1" 
-                                         Padding="10" Source="plus_math_60px"
-                                         Clicked="EntryText_Completed"/>
-                        </Grid>
-                    </Frame>
-                </Grid>
-            </Grid>
+
+            <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <Image x:Name="imageGif" VerticalOptions="Center" Source="fgif2.gif" IsAnimationPlaying="True" IsVisible="false"/>
+                <Label x:Name="labelLoad" Text="Загрузка городов" TextColor="Gray" HorizontalOptions="Center" FontSize="13" IsVisible="false"/>
+
+                <ListView x:Name="gameListView" HasUnevenRows="True" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                          ItemTemplate="{StaticResource chatDataTemplateSelector}" 
+                          SeparatorVisibility="None">
+                </ListView>
+
+
+            </StackLayout>
+
+            <Frame Grid.Row="2" BackgroundColor="White" CornerRadius="15" Margin="10,5,10,5" BorderColor="White" IsClippedToBounds="True" Padding="2" HasShadow="False">
+
+                <Frame Padding="0" BackgroundColor="White" CornerRadius="15" HasShadow="False" Margin="0,0,0,0">
+                    <Grid BackgroundColor="#6adea0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry x:Name="entryText" BackgroundColor="#6adea0" TextColor="Black" Margin="0,0,0,0" Grid.Column="1"
+                               Placeholder="Введите город"
+                               IsTextPredictionEnabled="False"
+                               VerticalOptions="Fill" HorizontalOptions="Fill"
+                               Focused="entryText_Focused" Completed="EntryText_Completed"/>
+                        <ImageButton Source="usend_32px.png" Grid.Column="2" BackgroundColor="#6adea0" HorizontalOptions="Start" Scale="0.7" Clicked="EntryText_Completed"/>
+                    </Grid>
+                </Frame>
+
+            </Frame>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

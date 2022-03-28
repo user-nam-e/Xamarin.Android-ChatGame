@@ -4,11 +4,21 @@
              x:Class="App2.CitiesPage">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Города"
+        <Grid>
+            <Label Grid.Column="0" Text="Города"
                    TextColor="White" 
-                   FontSize="Title" VerticalOptions="Center"/>
-        </StackLayout>
+                   FontSize="Title" 
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Start"/>
+            <ImageButton x:Name="helpButton"
+                         Source="help_50px.png"  Scale="1" 
+                         VerticalOptions="Start"
+                         HorizontalOptions="End"
+                         Grid.Column="1"
+                         BackgroundColor="#6adea0"
+                         Margin="0,0,15,0" CornerRadius="20"
+                         Clicked="helpButton_Clicked"/>
+        </Grid>
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <Grid BackgroundColor="#81FBB8">
@@ -18,7 +28,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 
-                <SearchBar x:Name="CitiesSearchBar"
+                <SearchBar x:Name="citiesSearchBar"
                        TextChanged="CitiesSearchBar_TextChanged" VerticalOptions="Fill" HorizontalOptions="Fill"
                        Placeholder="Введите город">
                 </SearchBar>

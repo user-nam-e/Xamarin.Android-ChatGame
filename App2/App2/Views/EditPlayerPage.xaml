@@ -51,7 +51,7 @@
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Text="Введите ваше новое имя: " BackgroundColor="Transparent" FontSize="23" FontAttributes="Bold" TextColor="#28C76F" HorizontalOptions="Center"/>
                         <Frame Grid.Row="1" Grid.RowSpan="2" BackgroundColor="Transparent" CornerRadius="30">
-                            <Entry x:Name="EntryName" Grid.Row="2" TextColor="Black" BackgroundColor="Transparent" FontSize="Large" Completed="EntryName_Completed" HorizontalTextAlignment="Center">
+                            <Entry x:Name="EntryName" Grid.Row="2" TextColor="Black" BackgroundColor="Transparent" FontSize="Large" Completed="EntryName_Completed" HorizontalTextAlignment="Center" MaxLength="12">
 
                             </Entry>
                         </Frame>

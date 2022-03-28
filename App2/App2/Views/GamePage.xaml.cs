@@ -8,202 +8,244 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
-namespace App2
+namespace App2.Views
 {
     public partial class GamePage : ContentPage
     {
         HubConnection hubConnection;
-        ObservableCollection<City> usedСities = new ObservableCollection<City>();
-        ObservableCollection<City> allСities = new ObservableCollection<City>();
-        City currentCity = new City();
-        int numberOfHints = 3;
-        int time;
+        ObservableCollection<Chat> allСities = new ObservableCollection<Chat>();
+        ObservableCollection<Chat> usedCities = new ObservableCollection<Chat>();
+        int numberOfHints = 333;
+        bool accesToWrite = false;
+        double time = Preferences.Get("timerValue", 60);
+        bool timerAlive;
 
         public GamePage()
         {
             InitializeComponent();
+            LoadData();
+            hintButton.Text = $"Подсказка ({numberOfHints})";
 
+
+            if (timerAlive = time != -1)
+            {
+                timerButton.Text = time.ToString();
+                StartTimer();
+            }
+        }
+
+        private void StartTimer()
+        {
+            time = Preferences.Get("timerValue", 60);
+            timerButton.Text = time.ToString();
+
+            Device.StartTimer(new TimeSpan(0, 0, 0, 0, 500), () =>
+                {
+                    time -= 0.5;
+
+                    if (!time.ToString().Contains(",") && !time.ToString().Contains("."))
+                    {
+                        timerButton.Text = time.ToString();
+                    }
+
+                    if (time <= 0)
+                    {
+                        DisplayAlert("Вы проиграли", "Время на ответ исчерпано ¯\\_(ツ)_/¯", "ok");
+                        Navigation.PopAsync(true);
+                        return false;
+                    }
+
+                    return timerAlive;
+                });
+        }
+
+        async void LoadGif()
+        {
+            while (allСities.Count == 0)
+            {
+                await Task.Delay(500);
+            }
+
+            imageGif.IsVisible = false;
+            labelLoad.IsVisible = false;
+            accesToWrite = true;
+        }
+
+        async void LoadData()
+        {
             if (Preferences.Get("localDataSwitch", true))
             {
-                XmlLoadAsync();
-            }
-            else
-            {
-                AzureLoadAsync();
-            }
-
-            time = Preferences.Get("timerValue", 60);
-            {
-                if (time != -1)
+                using (var stream = await FileSystem.OpenAppPackageFileAsync("cityData.xml"))
                 {
-                    StartTimer();
-                    Menu.Text = time.ToString();
-                }
-            }
+                    XDocument xdoc = XDocument.Load(stream);
 
-            GameListView.ItemsSource = usedСities;
-        }
-
-        void StartTimer()
-        {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
-                Menu.Text = time--.ToString();
-
-                if (time == -3)
-                {
-                    //DisplayAlert("Вы проиграли", "Время на ответ исчерпано ¯\\_(ツ)_/¯", "ok");
-                    return false;
-                }
-                else if (time < 0 && time != -2)
-                {
-                    DisplayAlert("Вы проиграли", "Время на ответ исчерпано ¯\\_(ツ)_/¯", "ok");
-                    Navigation.PopAsync(true);
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            });
-        }
-
-        void ResetTime()
-        {
-            time = Preferences.Get("timerValue", 60);
-        }
-
-        async void XmlLoadAsync()
-        {
-            using (var stream = await FileSystem.OpenAppPackageFileAsync("cityData.xml"))
-            {
-                XDocument xdoc = XDocument.Load(stream);
-
-                foreach (XElement cityElement in xdoc.Element("rocid").Elements("city"))
-                {
-                    XElement nameCityElement = cityElement.Element("name");
-                    XElement countryNameElement = cityElement.Element("country");
-                    XElement idElement = cityElement.Element("ID");
-
-                    if (nameCityElement != null && countryNameElement != null && idElement != null)
+                    foreach (XElement cityElement in xdoc.Element("rocid").Elements("city"))
                     {
-                        allСities.Add(new City() { CityName = nameCityElement.Value, FlagId = $"a{idElement.Value}.png" });
+                        XElement nameCityElement = cityElement.Element("name");
+                        XElement countryNameElement = cityElement.Element("country");
+                        XElement idElement = cityElement.Element("ID");
+
+                        if (nameCityElement != null && countryNameElement != null && idElement != null)
+                        {
+                            allСities.Add(new Chat() { CityName = nameCityElement.Value, FlagId = $"a{idElement.Value}.png" });
+                        }
                     }
                 }
             }
-        }
-
-        async void AzureLoadAsync()
-        {
-            hubConnection = new HubConnectionBuilder().WithUrl("https://citieschatapi.azurewebsites.net/chat").Build();
-
-            hubConnection.On<List<City>>("ReceiveCities", (cities) =>
+            else
             {
-                foreach (var item in cities)
+                imageGif.IsVisible = true;
+                labelLoad.IsVisible = true;
+                hubConnection = new HubConnectionBuilder().WithUrl("https://citieschatapi.azurewebsites.net/chat").Build();
+
+                hubConnection.On<List<Chat>>("ReceiveCities", (cities) =>
                 {
-                    this.allСities.Add(new City() { CityName = item.CityName, FlagId = $"a{item.FlagId}.png" });
+                    foreach (var item in cities)
+                    {
+                        this.allСities.Add(new Chat() { CityName = item.CityName, FlagId = $"a{item.FlagId}.png" });
+                    }
+                });
+
+                try
+                {
+                    await hubConnection.StartAsync();
+                    await hubConnection.SendAsync("GetCities");
                 }
-            });
+                catch (Exception ex)
+                {
+                    await DisplayAlert($"Error", $"Проверьте подключение к интернету\n{ex.Message}", "OK");
+                }
+            }
 
-            try
-            {
-                await hubConnection.StartAsync();
-                await hubConnection.SendAsync("GetCities");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert($"Error", $"Проверьте подключение к интернету\n{ex.Message}", "OK");
-            }
+            LoadGif();
+
+            gameListView.ItemsSource = usedCities;
         }
 
-        private void EntryText_Completed(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //entryText.Focus();
+            App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
+            base.OnAppearing();
+        }
 
+        protected override void OnDisappearing()
+        {
+            App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Pan);
+            base.OnDisappearing();
+        }
+
+        void EntryText_Completed(object sender, EventArgs e)
+        {
+            entryText.Focus();
+            var playerCity = new Chat();
             try
             {
-                if (usedСities.Count > 0)
+                if (usedCities.Count > 0)
                 {
-                    City lastCity = usedСities.Last();
-                    lastCity.SecondCityName = lastCity.SecondCityName.Trim('ь', 'ы');
+                    var lastCity = usedCities.Last();
+                    lastCity.CityName = lastCity.CityName.Trim('ь', 'ы', 'ё', 'ъ', ')');
 
-                    currentCity = allСities
-                        .Where(x => x.CityName.ToLower().StartsWith(lastCity.SecondCityName.Last().ToString()))
+                    playerCity = allСities
+                        .Where(x => x.CityName.ToLower().StartsWith(lastCity.CityName.Last().ToString()))
                         .Where(x => x.CityName.ToLower() == entryText.Text.ToLower().Trim())
                         .First();
                 }
                 else
                 {
-                    currentCity = allСities
+                    playerCity = allСities
                         .Where(x => x.CityName.ToLower() == entryText.Text.ToLower().Trim())
                         .Select(x => x).First();
                 }
+                timerAlive = false;
+
+                allСities.Remove(playerCity);
+                usedCities.Add(new Chat(playerCity) { Status = "sent" });
                 GameBot();
-                // ну как-то так
-                usedСities.Add(currentCity);
-                allСities.Remove(currentCity);
-                GameListView.ScrollTo(usedСities.Last(), ScrollToPosition.End, true);
-                ResetTime();
+                //////////
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                entryText.Text = string.Empty;
+                //entryText.Text = string.Empty;
                 //DisplayAlert(ex.Message, "error", "error");
             }
 
             entryText.Text = string.Empty;
         }
 
-        private void GameBot()
+        async void GameBot()
         {
-            var botCities = allСities.Where(i => i.CityName.ToLower().StartsWith(currentCity.CityName.Trim('ь', 'ы').Last().ToString().ToLower()));
+            try
+            {
+                await Task.Delay(new Random().Next(500, 600));
 
-            var botCity = botCities.ToList()[new Random().Next(0, botCities.Count())];
+                //await Task.Delay(1000);
 
-            allСities.Remove(botCity);
-            currentCity.SecondCityName = botCity.CityName;
-            currentCity.SecondFlagId = botCity.FlagId;
+                var botCities = allСities.Where(i => i.CityName.ToLower().StartsWith(usedCities.Last().CityName.Trim('ь', 'ы', 'ё', 'ъ', ')').Last().ToString().ToLower()));
+
+                var botCity = botCities.ToList()[new Random().Next(0, botCities.Count())];
+
+                allСities.Remove(botCity);
+                usedCities.Add(new Chat(botCity) { Status = "received" });
+                accesToWrite = true;
+                timerAlive = true;
+                if (timerAlive = time != -1)
+                {
+                    timerButton.Text = time.ToString();
+                    StartTimer();
+                }
+                ScrollToLastElement();
+                //StartTimer();
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Ошибка", "Попробуйте поменять используемую базу городов", "ок");
+            }
         }
 
         private async void Hint_Clicked(object sender, EventArgs e)
         {
-            if (numberOfHints == 0)
+            if (accesToWrite)
             {
-                await DisplayAlert("У вас закончились подсказки",
-                    "Узнать новые города вы можете в нашей базе",
-                    "ОК");
-            }
-            else if (await DisplayAlert("Вы действительно хотите использовать подсказку?", $"У вас их {numberOfHints}", "ОК", "ОТМЕНА") && numberOfHints > 0)
-            {
-                var botCity = new City();
-                try
+                if (numberOfHints == 0)
                 {
-                    if (usedСities.Count > 0)
-                    {
-                        City lastCity = usedСities.Last();
-                        lastCity.SecondCityName = lastCity.SecondCityName.Trim('ь', 'ы');
-
-                        currentCity = allСities
-                            .Where(x => x.CityName.ToLower().StartsWith(lastCity.SecondCityName.Last().ToString()))
-                            .First();
-                    }
-                    else
-                    {
-                        currentCity = allСities[new Random().Next(0, allСities.Count())];
-                    }
-                    numberOfHints--;
-                    GameBot();
-                    usedСities.Add(currentCity);
-                    allСities.Remove(currentCity);
-                    GameListView.ScrollTo(usedСities.Last(), ScrollToPosition.End, true);
-                    ResetTime();
-
+                    await DisplayAlert("У вас закончились подсказки",
+                        "Узнать новые города вы можете в нашей базе",
+                        "ОК");
                 }
-                catch (Exception ex)
+                else if (await DisplayAlert("Вы действительно хотите использовать подсказку?", $"У вас их {numberOfHints}", "ОК", "ОТМЕНА") && numberOfHints > 0)
                 {
-                    //await DisplayAlert(ex.Message, "error", "error");
+                    accesToWrite = false;
+                    try
+                    {
+                        var relevantCity = new Chat();
+                        timerAlive = false;
+
+                        if (usedCities.Count > 0)
+                        {
+                            var relevantCities = allСities.Where(i => i.CityName.ToLower().StartsWith(usedCities.Last().CityName.Trim('ь', 'ы', 'ё', 'ъ', ')')
+                                .Last().ToString().ToLower()));
+
+                            relevantCity = relevantCities.ToList()[new Random().Next(0, relevantCities.Count())];
+                        }
+                        else
+                        {
+                            relevantCity = allСities[new Random().Next(0, allСities.Count())];
+                        }
+                        numberOfHints--;
+                        hintButton.Text = $"Подсказка ({numberOfHints})";
+
+                        allСities.Remove(relevantCity);
+                        usedCities.Add(new Chat() { CityName = relevantCity.CityName, FlagId = relevantCity.FlagId, Status = "sent" });
+                        gameListView.ScrollTo(usedCities.Last(), ScrollToPosition.Start, true);
+
+                        GameBot();
+                    }
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert(ex.Message, "error", "error");
+                    }
                 }
                 entryText.Text = "";
             }
@@ -214,11 +256,10 @@ namespace App2
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("ВНИМАНИЕ", "Завершить игру и выйти в главное меню?", "Да", "Нет");
-                //if (result) await this.Navigation.PopAsync(); // or anything else
 
                 if (result)
                 {
-                    time = -2;
+                    timerAlive = false;
                     await this.Navigation.PushAsync(new MainPage(), false);
                 }
             });
@@ -231,14 +272,29 @@ namespace App2
             Device.BeginInvokeOnMainThread(async () =>
             {
                 var result = await this.DisplayAlert("ВНИМАНИЕ", "Завершить игру и выйти в главное меню?", "Да", "Нет");
-                //if (result) await this.Navigation.PopAsync();
-
                 if (result)
                 {
-                    time = -2;
+                    timerAlive = false;
                     await this.Navigation.PushAsync(new MainPage(), false);
                 }
             });
+        }
+
+        async void ScrollToLastElement()
+        {
+            gameListView.ScrollTo(usedCities.Last(), ScrollToPosition.Start, true);
+
+            await Task.Delay(150);
+
+            gameListView.ScrollTo(usedCities.Last(), ScrollToPosition.Start, true);
+        }
+
+        private void entryText_Focused(object sender, FocusEventArgs e)
+        {
+            if (usedCities.Count != 0)
+            {
+                ScrollToLastElement();
+            }
         }
     }
 }

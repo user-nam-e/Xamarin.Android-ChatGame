@@ -10,7 +10,7 @@ using Xamarin.Essentials;
 using Microsoft.AspNetCore.SignalR.Client;
 using App2.Views;
 
-namespace App2
+namespace App2.Views
 {
     public partial class MainPage : ContentPage
     {
@@ -51,7 +51,21 @@ namespace App2
 
         private async void ButtonCities_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new CitiesPage(), false);
+            if (!Preferences.Get("localDataSwitch", true))
+            {
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    await Navigation.PushAsync(new CitiesPage(), false);
+                }
+                else
+                {
+                    await DisplayAlert("Ошибка", "Проверьте подключение к интернету", "OK");
+                }
+            }
+            else
+            {
+                await Navigation.PushAsync(new CitiesPage(), false);
+            }
         }
 
         private async void ButtonSetting_Clicked(object sender, EventArgs e)

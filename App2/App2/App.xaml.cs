@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Collections.Generic;
+using App2.Views;
 
 namespace App2
 {
@@ -24,7 +25,6 @@ namespace App2
 
         protected override void OnSleep()
         {
-            //App2.Views.SelectPlayerPage.
             if (Views.SelectPlayerPage.hubConnection != null)
             {
                 if (Views.SelectPlayerPage.hubConnection.State == HubConnectionState.Connected)

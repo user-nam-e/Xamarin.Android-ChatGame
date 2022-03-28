@@ -39,7 +39,7 @@
                       Grid.Row="1" Grid.RowSpan="9">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell Height="80" Tapped="buttonPlayer_Clicked">
+                            <ViewCell Height="80" Tapped="buttonPlayer_Clicked" IsEnabled="True">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition />

@@ -31,7 +31,21 @@ namespace App2.Views
 
         private async void ButtonPlayWithBot_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GamePage(), false);
+            if (!Preferences.Get("localDataSwitch", true))
+            {
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    await Navigation.PushAsync(new GamePage(), false);
+                }
+                else
+                {
+                    await DisplayAlert("Ошибка", "Проверьте подключение к интернету или смените базу данных", "OK");
+                }
+            }
+            else
+            {
+                await Navigation.PushAsync(new GamePage(), false);
+            }
         }
 
         private async void ButtonPlayWithPlayer_Clicked(object sender, EventArgs e)

@@ -37,7 +37,7 @@
                     </LinearGradientBrush>
                 </BoxView.Background>
             </BoxView>
-            <Grid  >
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
                     <RowDefinition />

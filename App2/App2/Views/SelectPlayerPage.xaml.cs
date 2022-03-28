@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace App2.Views
 {
@@ -162,8 +164,8 @@ namespace App2.Views
 
         private async void buttonPlayer_Clicked(object sender, EventArgs e)
         {
-            Player selectedPlayer = (Player)((ViewCell)sender).BindingContext;
-
+            Player selectedPlayer = (Player)((Xamarin.Forms.ViewCell)sender).BindingContext;
+            
             try
             {
                 if (selectedPlayer != null)

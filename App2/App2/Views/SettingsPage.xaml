@@ -41,7 +41,7 @@
                                         Text="Анимация градиента на главном экране" 
                                            FontSize="17" FontAttributes="Bold" TextColor="Black" />
 
-                                    <Label x:Name="animationTurnOff" Grid.Row="1"  
+                                    <Label x:Name="animationStateLabel" Grid.Row="1"  
                                            Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
 
                                     <Switch x:Name="animationGradientSwitch" Grid.Column="1"  
@@ -65,7 +65,7 @@
                                     <Label Margin="10,5,0,0" 
                                         Text="Использовать локальную базу данных" FontSize="17" FontAttributes="Bold" TextColor="Black" />
 
-                                    <Label x:Name="localTurnOff" Grid.Row="1"  Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
+                                    <Label x:Name="dataStateLabel" Grid.Row="1"  Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
 
                                     <Switch x:Name="localDataSwitch" Grid.Column="1"  
                                             Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Center"
@@ -90,7 +90,7 @@
 
                                 <Label Text="Текущее имя:" Grid.Row="1" Margin="10,0,0,0" TextColor="Gray" FontSize="15"/>
                                 <Label Grid.Row="1" Grid.Column="1"
-                                            x:Name="currentName"  
+                                            x:Name="currentNameLabel"  
                                             Margin="10,0,0,0" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
                             </Grid>
                         </ViewCell>
