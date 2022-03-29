@@ -23,7 +23,7 @@ namespace App2.Views
         List<Chat> allСities = new List<Chat>();
         ObservableCollection<Chat> usedCities = new ObservableCollection<Chat>();
         bool accesToWrite;
-        private int numberOfHints = 100;
+        private int numberOfHints = 1;
         double time = 60;
         bool timerAlive;
 

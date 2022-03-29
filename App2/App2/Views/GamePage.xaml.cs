@@ -17,7 +17,7 @@ namespace App2.Views
         HubConnection hubConnection;
         ObservableCollection<Chat> allСities = new ObservableCollection<Chat>();
         ObservableCollection<Chat> usedCities = new ObservableCollection<Chat>();
-        int numberOfHints = 333;
+        int numberOfHints = 3;
         bool accesToWrite = false;
         double time = Preferences.Get("timerValue", 60);
         bool timerAlive;
@@ -138,7 +138,7 @@ namespace App2.Views
 
         void EntryText_Completed(object sender, EventArgs e)
         {
-            entryText.Focus();
+            //entryText.Focus();
             var playerCity = new Chat();
             try
             {
