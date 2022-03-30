@@ -1,7 +1,11 @@
 # Xamarin.Android-ChatGame
-<u>Chat-game "Cities" for Android on russian language</u>
-
-<u><a href="https://youtu.be/i69sXFoKer8" target="_blank">Demonstration of work on video</a></u>
+Chat-game "Cities" for Android on russian language
+<style>
+   a {
+   text-decoration: underline; /* Подчеркивание заголовка */
+   }
+  </style>
+<a href="https://youtu.be/i69sXFoKer8" target="_blank">Demonstration of work on video</a>
 
 Available functions in the app:
  1) Built-in database with cities, countries and flags. It is presented as an xml file (At the moment there are 10961 entries)
