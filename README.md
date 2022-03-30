@@ -13,3 +13,5 @@ Available functions in the app:
  
 
 MainPaige 
+
+![image](https://user-images.githubusercontent.com/85613704/160895570-6444e6f0-1acd-420b-929e-8269302945e8.png)
