@@ -1,10 +1,6 @@
 # Xamarin.Android-ChatGame
 Chat-game "Cities" for Android on russian language
-<style>
-   a {
-   text-decoration: underline; /* Подчеркивание заголовка */
-   }
-  </style>
+
 <a href="https://youtu.be/i69sXFoKer8" target="_blank">Demonstration of work on video</a>
 
 Available functions in the app:
